@@ -35,7 +35,8 @@ def call_api(method, endpoint, action, payload='', path='/'):
     services = {'fcu': 'ec2',
                 'lbu': 'elb',
                 'osu': 's3',
-                'eim': 'iam'}
+                'eim': 'iam',
+                'icu': 'icu'}
 
     request_parameters = '{}&Version=2016-10-15'.format(action)
 
@@ -54,8 +55,8 @@ def call_api(method, endpoint, action, payload='', path='/'):
     if method == 'GET':
         request_url = endpoint + '?' + signed_request
         r = requests.get(request_url, headers=headers)
-    elif method == 'POST':
-        r = requests.post(endpoint, data=signed_request, headers=headers)
+    # elif method == 'POST':
+    #     r = requests.post(endpoint, data=signed_request, headers=headers)
     else:
         return 0, 'Method not supported'
     # Clean XML for proper parsing

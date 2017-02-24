@@ -1,7 +1,7 @@
 # /usr/local/bin/python
 # encoding = utf-8
 
-import sys, os, base64, datetime, hashlib, hmac, re
+import sys, os, base64, datetime, hashlib, hmac
 
 
 def sign(key, msg):
