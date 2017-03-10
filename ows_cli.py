@@ -41,7 +41,7 @@ if __name__ == '__main__':
             parsed[arg[2:]] = ukargs[i+1]
         else:
             pass
-
+            
     status_code, response = call(args_to_string(parsed))
 
     print "Code: {}".format(status_code)

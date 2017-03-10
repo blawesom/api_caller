@@ -43,6 +43,6 @@ def sign_request(params):
 
     # Create authorization header and add to request headers
     authorization_header = algorithm + ' ' + 'Credential=' + params['access_key'] + '/' + credential_scope + ', ' +  'SignedHeaders=' + signed_headers + ', ' + 'Signature=' + signature
-    headers = {'x-amz-date':amzdate, 'Authorization':authorization_header}
+    headers = {'x-amz-date':amzdate, 'Authorization':authorization_header, 'user-agent': 'awesome api_caller'}
 
     return canonical_querystring, headers
