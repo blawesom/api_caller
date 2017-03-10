@@ -1,6 +1,7 @@
 import os, sys, argparse
 from api_caller import call_api
 from xml.etree import cElementTree
+import xmltodict, json
 
 """
     You need to export to your environment:
@@ -18,8 +19,7 @@ def call(service, call_arg):
                 encoding='UTF-8')
     endpoint = os.environ.get('{}_ENDPOINT'.format(service.upper()))
     status_code, call_response = call_api('GET', endpoint, call_arg)
-    parser.feed(call_response)
-    response = parser.close()
+    response = xmltodict.parse(call_response)
     return status_code, response
 
 
@@ -35,9 +35,4 @@ if __name__ == '__main__':
     status_code, response = call(service, parsed_string)
 
     print "Code: {}".format(status_code)
-    print "Request Id: {}".format(response.find('requestId').text)
-    print "Data:"
-
-    for child in response.getchildren():
-         for item in child:
-             print [(ite.tag, ite.text) for ite in item.getchildren()]
+    print json.dumps(response)
