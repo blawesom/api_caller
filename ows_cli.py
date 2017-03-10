@@ -2,7 +2,7 @@ import os, sys, argparse
 from api_caller import call_api
 from xml.etree import cElementTree
 import xmltodict, json
-from api_caller import get_version
+from ConfigParser import ConfigParser
 
 
 def call(service, call_arg):
@@ -13,7 +13,9 @@ def call(service, call_arg):
 
 
 def help(extend=False):
-    print '\n\tTo get help use the -h or --help argument\n\tOWS CLI v{}'.format(get_version())
+    conf=ConfigParser()
+    conf.read('ows.cfg')
+    print '\n\t---- OWS CLI v{} ----\n\tTo get help use the -h or --help argument'.format(conf.get('app', 'version'))
     if extend:
         print '\n\tExpected arguments are:\
                 \n\t\tService: fcu, lbu, eim, osu...\

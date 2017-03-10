@@ -6,9 +6,6 @@ import sigv4
 import requests
 import inspect
 
-def get_version():
-    return '0.1'
-
 
 def call_api(method, endpoint, action, payload='', path='/'):
     """
