@@ -6,6 +6,9 @@ import sigv4
 import requests
 import inspect
 
+def get_version():
+    return '0.1'
+
 
 def call_api(method, endpoint, action, payload='', path='/'):
     """
@@ -38,7 +41,7 @@ def call_api(method, endpoint, action, payload='', path='/'):
                 'eim': 'iam',
                 'icu': 'icu'}
 
-    request_parameters = '{}&Version=2016-10-15'.format(action)
+    request_parameters = '{}&Version=2016-10-24'.format(action)
 
     params = { 'method': method,
                 'service': services[endpoint.split('.')[0]],

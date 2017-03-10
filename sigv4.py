@@ -2,7 +2,7 @@
 # encoding = utf-8
 
 import sys, os, base64, datetime, hashlib, hmac
-
+from api_caller import get_version
 
 def sign(key, msg):
     return hmac.new(key, msg.encode('utf-8'), hashlib.sha256).digest()
@@ -17,6 +17,15 @@ def getSignatureKey(key, dateStamp, regionName, serviceName):
 
 
 def sign_request(params):
+        """
+        Generate a signed requst with headers and params
+
+        :param params: params for the http request
+        :type method: dict
+        :return: signed canonical_uri and headers
+        :rtype: tuple
+        """
+
     region = params['host'].split('.')[1]
     endpoint = 'https://{}'.format(params['host'])
 
@@ -43,6 +52,6 @@ def sign_request(params):
 
     # Create authorization header and add to request headers
     authorization_header = algorithm + ' ' + 'Credential=' + params['access_key'] + '/' + credential_scope + ', ' +  'SignedHeaders=' + signed_headers + ', ' + 'Signature=' + signature
-    headers = {'x-amz-date':amzdate, 'Authorization':authorization_header, 'user-agent': 'awesome api_caller'}
+    headers = {'x-amz-date':amzdate, 'Authorization':authorization_header, 'user-agent': 'blawesom custom API client v{} - 2017-03-10'.format(get_version())}
 
     return canonical_querystring, headers
