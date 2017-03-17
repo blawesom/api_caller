@@ -1,7 +1,7 @@
 # /usr/local/bin/python
 # encoding = utf-8
 
-import sys, os, base64, datetime, hashlib, hmac
+import datetime, hashlib, hmac
 from ConfigParser import ConfigParser
 
 def sign(key, msg):
@@ -26,15 +26,14 @@ def sign_request(params):
     :rtype: tuple
     """
     conf = ConfigParser()
-    conf.read(ows.cfg)
+    conf.read('ows.cfg')
 
     region = params['host'].split('.')[1]
-    endpoint = 'https://{}'.format(params['host'])
 
     # Create a date for headers and the credential string
-    t = datetime.datetime.utcnow()
-    amzdate = t.strftime('%Y%m%dT%H%M%SZ')
-    datestamp = t.strftime('%Y%m%d') # Date w/o time, used in credential scope
+    temi = datetime.datetime.utcnow()
+    amzdate = temi.strftime('%Y%m%dT%H%M%SZ')
+    datestamp = temi.strftime('%Y%m%d') # Date w/o time, used in credential scope
     canonical_uri = params['path']
 
     # Query string values must be URL-encoded (space=%20).
