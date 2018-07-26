@@ -24,7 +24,6 @@ def call_api(method, endpoint, action, payload='', path='/'):
     :return: status_code and content
     :rtype: tuple
     """
-
     access_key = os.environ.get('AWS_ACCESS_KEY_ID')
     secret_key = os.environ.get('AWS_SECRET_ACCESS_KEY')
 
@@ -38,7 +37,7 @@ def call_api(method, endpoint, action, payload='', path='/'):
                 'eim': 'iam',
                 'icu': 'icu'}
 
-    request_parameters = '{}&Version=2016-10-24'.format(action)
+    request_parameters = '{}&Version=2018-07-24'.format(action)
 
     params = { 'method': method,
                 'service': services[endpoint.split('.')[0]],
